@@ -1,6 +1,8 @@
 import React from "react";
 
-const GamePage: React.FC = () => {
+export interface GamePageProps {}
+
+const GamePage: React.FC<GamePageProps> = () => {
     return <div>GamePage</div>;
 };
 
