@@ -1,6 +1,7 @@
 import React from "react";
 import { User } from "../app/models/user";
 import { Flex, Image, Text } from "@chakra-ui/react";
+import UserStats from "./UserStats";
 
 export interface UserCardProps {
     user: User;
@@ -38,7 +39,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 #{user.username}
             </Text>
 
-            <Flex></Flex>
+            <UserStats games={user.games} />
         </Flex>
     );
 };

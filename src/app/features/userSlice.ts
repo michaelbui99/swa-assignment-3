@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../models/user";
+import { Game } from "../models/game";
 
 export interface UserState {
     value: User | undefined;
@@ -39,6 +40,13 @@ export const createUser = createAsyncThunk<undefined, User>(
         return undefined;
     }
 );
+
+async function getAllGames(token: string): Promise<Game[]> {
+    const baseUrl = "http://localhost:9090";
+    const endpoint = `${baseUrl}/games?token=${token}`;
+    const response = await fetch(endpoint);
+    return (await response.json()) as Game[];
+}
 
 const getusebyId = async function getuserById(
     userId: number,
@@ -83,9 +91,13 @@ export const loginUser = createAsyncThunk<User | undefined, LoginRequestDTO>(
         }
 
         user.token = loginData.token;
+        const games = await getAllGames(user.token);
+        user.games = games.filter((game) => game.user === user.id);
+        console.log(user);
         return user;
     }
 );
+
 export const logoutUser = createAsyncThunk<undefined, User>(
     "user/logoutUser",
     async (user, { rejectWithValue }) => {

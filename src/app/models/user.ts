@@ -1,3 +1,5 @@
+import { Game } from "./game";
+
 export type User = {
     id: number;
     username: string;
@@ -6,4 +8,5 @@ export type User = {
     token?: string;
     displayName?: string;
     profileImageUrl?: string;
+    games: Game[];
 };

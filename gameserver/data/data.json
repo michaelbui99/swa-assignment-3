@@ -33,5 +33,12 @@
             "username": "testhest123"
         }
     ],
-    "games": []
+    "games": [
+        {
+            "id": 1,
+            "user": 2,
+            "score": 4242,
+            "completed": true
+        }
+    ]
 }
