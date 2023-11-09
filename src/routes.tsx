@@ -3,22 +3,39 @@ import App from "./App";
 import GamePage from "./pages/GamePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
+import Layout from "./components/Layout";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <App></App>,
+        element: (
+            <Layout>
+                <App></App>
+            </Layout>
+        ),
     },
     {
         path: "/game",
-        element: <GamePage />,
+        element: (
+            <Layout>
+                <GamePage />
+            </Layout>
+        ),
     },
     {
         path: "/signup",
-        element: <SignUpPage />,
+        element: (
+            <Layout>
+                <SignUpPage />
+            </Layout>
+        ),
     },
     {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+            <Layout>
+                <LoginPage />
+            </Layout>
+        ),
     },
 ]);
