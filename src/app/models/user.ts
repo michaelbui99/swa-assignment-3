@@ -4,4 +4,6 @@ export type User = {
     password: string;
     admin: boolean;
     token?: string;
+    displayName?: string;
+    profileImageUrl?: string;
 };
