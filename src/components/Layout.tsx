@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <Stack>
             <Navbar routeLinks={routeLinks} />
-            <Box padding="4rem">{children}</Box>
+            <Box padding="0rem 4rem">{children}</Box>
         </Stack>
     );
 };
