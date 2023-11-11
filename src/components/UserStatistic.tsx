@@ -1,4 +1,4 @@
-import { VStack, Text, Heading } from "@chakra-ui/react";
+import { VStack, Text, Heading, Flex } from "@chakra-ui/react";
 import React from "react";
 
 export type UserStatisticType = {
@@ -12,12 +12,12 @@ export interface UserStatisticProps {
 
 const UserStatistic: React.FC<UserStatisticProps> = ({ statistic }) => {
     return (
-        <VStack>
-            <Heading fontSize="xl" fontWeight="bold">
+        <Flex flexDir="column" alignItems="center">
+            <Heading textAlign="center" fontSize="xl" fontWeight="bold">
                 {statistic.title}
             </Heading>
-            <Text>{statistic.value}</Text>
-        </VStack>
+            <Text textAlign="center">{statistic.value}</Text>
+        </Flex>
     );
 };
 

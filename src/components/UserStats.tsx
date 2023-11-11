@@ -9,14 +9,20 @@ export interface UserStatsProps {
 
 const UserStats: React.FC<UserStatsProps> = ({ games }) => {
     return (
-        <Flex flexDirection="row" columnGap="2rem">
+        <Flex
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+            columnGap="2rem"
+        >
             <UserStatistic
-                statistic={{ title: "Total games played", value: games.length }}
+                statistic={{ title: "Games played", value: games.length }}
             />
 
             <UserStatistic
                 statistic={{
-                    title: "Total games completed",
+                    title: "Games completed",
                     value: games.filter((game) => game.completed).length,
                 }}
             />
@@ -24,9 +30,10 @@ const UserStats: React.FC<UserStatsProps> = ({ games }) => {
             <UserStatistic
                 statistic={{
                     title: "Highest score",
-                    value: games
-                        .map((game) => game.score)
-                        .sort((a, b) => a - b)[0],
+                    value:
+                        games
+                            .map((game) => game.score)
+                            .sort((a, b) => a - b)[0] ?? 0,
                 }}
             />
         </Flex>

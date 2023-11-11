@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../app/models/user";
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import UserStats from "./UserStats";
 
 export interface UserCardProps {
@@ -13,24 +13,24 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
     return (
         <Flex
-            width="100%"
-            height="2rem"
+            width="20%"
             flexDir="column"
             justifyContent="center"
             alignItems="center"
         >
             <Image
-                maxHeight="100px"
-                maxWidth="100px"
+                maxHeight="150px"
+                maxWidth="150px"
                 src={user.profileImageUrl ?? defaultProfileImage}
             />
-            <Text fontWeight="bold" fontSize="xl">
+            <Text textAlign="center" fontWeight="bold" fontSize="xl">
                 {" "}
                 {user.displayName ?? user.username}
             </Text>
             <Text
                 fontSize="md"
                 color="#D8DEE9"
+                textAlign="center"
                 fontStyle="italic"
                 transition="all 0.3s ease-in-out"
                 _hover={{ color: "#222", cursor: "default" }}
@@ -38,8 +38,6 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 {" "}
                 #{user.username}
             </Text>
-
-            <UserStats games={user.games} />
         </Flex>
     );
 };

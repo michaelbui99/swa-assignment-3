@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../models/user";
 import { Game } from "../models/game";
@@ -120,7 +120,11 @@ export const logoutUser = createAsyncThunk<undefined, User>(
 export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        updateProfile: (state, action: PayloadAction<User>) => {
+            state.value = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(createUser.fulfilled, (state, action) => {
             state.value = action.payload;
@@ -141,4 +145,5 @@ export const userSlice = createSlice({
     },
 });
 
+export const { updateProfile } = userSlice.actions;
 export default userSlice.reducer;
