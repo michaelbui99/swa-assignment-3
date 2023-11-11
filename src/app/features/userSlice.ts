@@ -21,6 +21,28 @@ const initialState: UserState = {
     value: undefined,
 };
 
+export const updateUser = createAsyncThunk<User, User>(
+    "user/updateUser",
+    async (user, { rejectWithValue }) => {
+        const baseUrl = "http://localhost:9090";
+        const endpoint = `${baseUrl}/users/${user.id}?token=${user.token}`;
+        const response = await fetch(endpoint, {
+            body: JSON.stringify({
+                displayName: user.displayName,
+                profileImageUrl: user.profileImageUrl,
+            }),
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.status < 200 || response.status >= 300) {
+            return rejectWithValue(undefined);
+        }
+        return user;
+    }
+);
+
 export const createUser = createAsyncThunk<undefined, User>(
     "user/createUser",
     async (user, { rejectWithValue }) => {
@@ -120,11 +142,7 @@ export const logoutUser = createAsyncThunk<undefined, User>(
 export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {
-        updateProfile: (state, action: PayloadAction<User>) => {
-            state.value = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(createUser.fulfilled, (state, action) => {
             state.value = action.payload;
@@ -142,8 +160,10 @@ export const userSlice = createSlice({
         builder.addCase(logoutUser.rejected, (state, _) => {
             state.value = state.value;
         });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.value = action.payload;
+        });
     },
 });
 
-export const { updateProfile } = userSlice.actions;
 export default userSlice.reducer;

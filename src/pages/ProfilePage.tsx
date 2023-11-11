@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { AppDispatch, RootState } from "../app/store";
 import { useNavigate } from "react-router-dom";
 import {
     Box,
@@ -16,13 +16,12 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    VStack,
     useDisclosure,
 } from "@chakra-ui/react";
 import UserCard from "../components/UserCard";
 import UserStats from "../components/UserStats";
 import { EditIcon } from "@chakra-ui/icons";
-import { updateProfile } from "../app/features/userSlice";
+import { updateUser } from "../app/features/userSlice";
 
 const ProfilePage: React.FC = () => {
     const currentUser = useSelector((state: RootState) => state.user.value);
@@ -36,7 +35,7 @@ const ProfilePage: React.FC = () => {
     );
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -115,7 +114,7 @@ const ProfilePage: React.FC = () => {
                                             colorScheme="blue"
                                             onClick={() => {
                                                 dispatch(
-                                                    updateProfile({
+                                                    updateUser({
                                                         ...currentUser,
                                                         displayName,
                                                         profileImageUrl:
