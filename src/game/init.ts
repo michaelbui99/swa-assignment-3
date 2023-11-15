@@ -3,7 +3,7 @@ import { Model } from './model'
 import { View } from './view'
 import { Controller } from './controller'
 
-class SequenceGenerator implements Generator<string> {
+export class SequenceGenerator implements Generator<string> {
     private sequence: string
     private index: number
 

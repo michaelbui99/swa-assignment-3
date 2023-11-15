@@ -27,6 +27,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             route: "/profile",
             show: currentUser ? true : false,
         },
+        {
+            label: "New Game",
+            route: "/game",
+            show: currentUser ? true : false,
+        },
     ] as RouteLinkType[];
 
     return (

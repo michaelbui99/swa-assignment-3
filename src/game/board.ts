@@ -44,6 +44,8 @@ type movePiceResult<T> = {
     newPiecePosition: Position;
 }
 
+export let score = 0;
+
 export function create<T>(
     generator: Generator<T>,
     width: number,
@@ -109,6 +111,7 @@ export function move<T>(
 
             if (refillResult.hasRefilled){
                 console.log("REFILLED", refillResult.board.state)
+                score++;
                 return gameLoop(refillResult.board, [...effects, ...allMatches.flatMap((m) => {
                     return { kind: "Match" as "Match",  match: m}
                 }), {kind: "Refill" as "Refill", board: refillResult.board}])
