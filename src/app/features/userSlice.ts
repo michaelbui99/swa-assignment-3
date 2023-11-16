@@ -145,23 +145,22 @@ export const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(createUser.fulfilled, (state, action) => {
-            state.value = action.payload;
-            console.log("User created: ", action.payload);
+            return { value: action.payload };
         });
         builder.addCase(createUser.rejected, (state, action) => {
             // TODO: think about how to do this.
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            state.value = action.payload;
+            return { value: action.payload };
         });
         builder.addCase(logoutUser.fulfilled, (state, action) => {
-            state.value = action.payload;
+            return { value: action.payload };
         });
         builder.addCase(logoutUser.rejected, (state, _) => {
-            state.value = state.value;
+            return state;
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {
-            state.value = action.payload;
+            return { value: action.payload };
         });
     },
 });

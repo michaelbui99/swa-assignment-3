@@ -16,12 +16,12 @@ export type Board<T> = {
     height: number;
 };
 
-type MatchEffect<T> = {
+export type MatchEffect<T> = {
     kind: "Match";
     match: Match<T>;
 };
 
-type RefillEffect<T> = {
+export type RefillEffect<T> = {
     kind: "Refill";
     board: Board<T>;
 };
@@ -33,18 +33,15 @@ export type MoveResult<T> = {
     effects: Effect<T>[];
 };
 
-
 type RefillResult<T> = {
     board: Board<T>;
     hasRefilled: boolean;
-}
+};
 type movePiceResult<T> = {
     board: Board<T>;
     stateChanged: boolean;
     newPiecePosition: Position;
-}
-
-export let score = 0;
+};
 
 export function create<T>(
     generator: Generator<T>,
@@ -101,27 +98,33 @@ export function move<T>(
 
     let boardAfterMove = swap(board, first, second);
 
-    function gameLoop(board: Board<T>, effects: Effect<T>[]): MoveResult<T>{
+    function gameLoop(board: Board<T>, effects: Effect<T>[]): MoveResult<T> {
         console.log("BEFORE MATCHES", board.state);
         let allMatches = getAllMatches(board);
-        if(allMatches.length > 0){
+        if (allMatches.length > 0) {
             let newCleardBoard = clearMatches(board, allMatches);
             let boardAfterMoved = movePiecesDown(newCleardBoard);
             let refillResult = refillEmptyPostions(boardAfterMoved, generator);
 
-            if (refillResult.hasRefilled){
-                console.log("REFILLED", refillResult.board.state)
-                score++;
-                return gameLoop(refillResult.board, [...effects, ...allMatches.flatMap((m) => {
-                    return { kind: "Match" as "Match",  match: m}
-                }), {kind: "Refill" as "Refill", board: refillResult.board}])
-            }else{
-                return gameLoop(refillResult.board, [...effects, ...allMatches.flatMap((m) => {
-                    return { kind: "Match" as "Match",  match: m}
-                })])
+            if (refillResult.hasRefilled) {
+                console.log("REFILLED", refillResult.board.state);
+                return gameLoop(refillResult.board, [
+                    ...effects,
+                    ...allMatches.flatMap((m) => {
+                        return { kind: "Match" as "Match", match: m };
+                    }),
+                    { kind: "Refill" as "Refill", board: refillResult.board },
+                ]);
+            } else {
+                return gameLoop(refillResult.board, [
+                    ...effects,
+                    ...allMatches.flatMap((m) => {
+                        return { kind: "Match" as "Match", match: m };
+                    }),
+                ]);
             }
-        }else{
-            return {board, effects}
+        } else {
+            return { board, effects };
         }
     }
     return gameLoop(boardAfterMove, []);
@@ -345,7 +348,7 @@ function getBelowConsecutiveMatches<T>(
     return go(
         board,
         piece(board, position),
-        { row: position.row  + 1, col: position.col },
+        { row: position.row + 1, col: position.col },
         0
     );
 }
@@ -503,34 +506,57 @@ function getVerticalMatches<T>(board: Board<T>, col: number): Match<T>[] {
     return go(board, firstPosition, firstPieceType, [], []);
 }
 
-function getEmptyPositions<T>(board: Board<T>): Position[]{
-    function go(board: Board<T>, currentPosition: Position, emptyPositions: Position[]): Position[]{
-        const newPosition = currentPosition.col < board.width -1 ? {row:currentPosition.row, col:currentPosition.col+1} : {row: currentPosition.row+1, col:0}
-        if (isOutsideBoard(board, currentPosition)){
-            return emptyPositions
-        }else{
-            if (piece(board, currentPosition) === undefined){
-                return go(board, newPosition, [...emptyPositions, currentPosition])
-            }else{
-                return go(board, newPosition, emptyPositions)
+function getEmptyPositions<T>(board: Board<T>): Position[] {
+    function go(
+        board: Board<T>,
+        currentPosition: Position,
+        emptyPositions: Position[]
+    ): Position[] {
+        const newPosition =
+            currentPosition.col < board.width - 1
+                ? { row: currentPosition.row, col: currentPosition.col + 1 }
+                : { row: currentPosition.row + 1, col: 0 };
+        if (isOutsideBoard(board, currentPosition)) {
+            return emptyPositions;
+        } else {
+            if (piece(board, currentPosition) === undefined) {
+                return go(board, newPosition, [
+                    ...emptyPositions,
+                    currentPosition,
+                ]);
+            } else {
+                return go(board, newPosition, emptyPositions);
             }
         }
     }
 
-    return go(board, {row: 0, col:0},  []);
+    return go(board, { row: 0, col: 0 }, []);
 }
 
-function refillEmptyPostions<T>(board: Board<T>, generator: Generator<T>): RefillResult<T> {
+function refillEmptyPostions<T>(
+    board: Board<T>,
+    generator: Generator<T>
+): RefillResult<T> {
     const emptyPositions = getEmptyPositions(board);
-    const refilledBoard = emptyPositions.reduce((currentBoardState, currentEmptyPosition) => setPiece(currentBoardState, currentEmptyPosition, generator.next()), board)
-    return {board: refilledBoard, hasRefilled: emptyPositions.length > 0 }
+    const refilledBoard = emptyPositions.reduce(
+        (currentBoardState, currentEmptyPosition) =>
+            setPiece(currentBoardState, currentEmptyPosition, generator.next()),
+        board
+    );
+    return { board: refilledBoard, hasRefilled: emptyPositions.length > 0 };
 }
 
-function clearMatches<T>(board: Board<T>, matchesToClear: Match<T>[]): Board<T> {
+function clearMatches<T>(
+    board: Board<T>,
+    matchesToClear: Match<T>[]
+): Board<T> {
     return matchesToClear.reduce((_, currentMatch) => {
-        return currentMatch.positions.reduce((boardAccumulator, currentPosition) => {
-            return setPiece(boardAccumulator, currentPosition, undefined);
-        }, board);
+        return currentMatch.positions.reduce(
+            (boardAccumulator, currentPosition) => {
+                return setPiece(boardAccumulator, currentPosition, undefined);
+            },
+            board
+        );
     }, board);
 }
 
@@ -554,48 +580,61 @@ function setPiece<T>(board: Board<T>, p: Position, value: T): Board<T> {
     };
 }
 
-function movePiecesInColumnToButtom<T>(board: Board<T>, position: Position): Board<T>{
-    if (position.row < 0){
+function movePiecesInColumnToButtom<T>(
+    board: Board<T>,
+    position: Position
+): Board<T> {
+    if (position.row < 0) {
         return board;
-    }else{
+    } else {
         const newBoardState = movePieceToButtom(board, position);
-        return movePiecesInColumnToButtom(newBoardState, {row: position.row-1, col: position.col});
+        return movePiecesInColumnToButtom(newBoardState, {
+            row: position.row - 1,
+            col: position.col,
+        });
     }
 }
 
-function movePieceToButtom<T>(board: Board<T>, position: Position): Board<T>{
-    if (isOutsideBoard(board, position)){
+function movePieceToButtom<T>(board: Board<T>, position: Position): Board<T> {
+    if (isOutsideBoard(board, position)) {
         return board;
     }
 
-    const below = {row: position.row+1, col:position.col} as Position;
+    const below = { row: position.row + 1, col: position.col } as Position;
     const belowPiece = piece(board, below);
 
-    if (belowPiece !== undefined){
+    if (belowPiece !== undefined) {
         return board;
-    }else{
+    } else {
         const moveResult = movePieceDown(board, position);
-        if(moveResult.stateChanged){
-            return movePieceToButtom(moveResult.board, moveResult.newPiecePosition);
-        }
-        else{
+        if (moveResult.stateChanged) {
+            return movePieceToButtom(
+                moveResult.board,
+                moveResult.newPiecePosition
+            );
+        } else {
             return moveResult.board;
         }
     }
 }
 
 function movePiecesDown<T>(board: Board<T>): Board<T> {
-    function do_movePiecesDown<T>(currentBoardState: Board<T>, currentColumn:number ): Board<T>{
-        if (currentColumn >= currentBoardState.width){
+    function do_movePiecesDown<T>(
+        currentBoardState: Board<T>,
+        currentColumn: number
+    ): Board<T> {
+        if (currentColumn >= currentBoardState.width) {
             return currentBoardState;
-        }else{
-            const newBoardState = movePiecesInColumnToButtom(currentBoardState, {row: currentBoardState.height -1, col: currentColumn});
+        } else {
+            const newBoardState = movePiecesInColumnToButtom(
+                currentBoardState,
+                { row: currentBoardState.height - 1, col: currentColumn }
+            );
             return do_movePiecesDown(newBoardState, currentColumn + 1);
         }
     }
     return do_movePiecesDown(board, 0);
 }
-
 
 function movePieceDown<T>(board: Board<T>, p: Position): movePiceResult<T> {
     const _piece = piece(board, p);
@@ -604,42 +643,75 @@ function movePieceDown<T>(board: Board<T>, p: Position): movePiceResult<T> {
         _piece === undefined ||
         p.row === board.height - 1
     ) {
-        return {board, stateChanged: false, newPiecePosition: p};
+        return { board, stateChanged: false, newPiecePosition: p };
     }
 
     const down = { row: p.row + 1, col: p.col };
     if (piece(board, down) !== undefined) {
-        return {board, stateChanged: false, newPiecePosition: p};
+        return { board, stateChanged: false, newPiecePosition: p };
     }
 
     let newBoard = swap(board, p, down);
-    return {board: newBoard, stateChanged: true, newPiecePosition: down};
+    return { board: newBoard, stateChanged: true, newPiecePosition: down };
 }
 
-
 function getAllMatches<T>(board: Board<T>): Match<T>[] {
-    function collectHorizontalMatches(board: Board<T>, currentPosition: Position, allMatches: Match<T>[]): Match<T>[]{
-        if (isOutsideBoard(board, currentPosition)){
+    function collectHorizontalMatches(
+        board: Board<T>,
+        currentPosition: Position,
+        allMatches: Match<T>[]
+    ): Match<T>[] {
+        if (isOutsideBoard(board, currentPosition)) {
             return allMatches;
-        }else{
-            const horizontalMatches = getHorizontalMatches(board, currentPosition.row);
-            const newPosition: Position =  {row: currentPosition.row+1, col: currentPosition.col};
-            return collectHorizontalMatches(board, newPosition, [...allMatches, ...horizontalMatches])
-        }
-    }
-    
-    function collectVerticalMatches(board: Board<T>, currentPosition: Position, allMatches: Match<T>[]): Match<T>[]{
-        if (isOutsideBoard(board, currentPosition)){
-            return allMatches;
-        }else{
-            const verticalMatches = getVerticalMatches(board, currentPosition.col);
-            const newPosition: Position =  {row: currentPosition.row, col: currentPosition.col+1};
-            return collectVerticalMatches(board, newPosition, [...allMatches, ...verticalMatches])
+        } else {
+            const horizontalMatches = getHorizontalMatches(
+                board,
+                currentPosition.row
+            );
+            const newPosition: Position = {
+                row: currentPosition.row + 1,
+                col: currentPosition.col,
+            };
+            return collectHorizontalMatches(board, newPosition, [
+                ...allMatches,
+                ...horizontalMatches,
+            ]);
         }
     }
 
-    const verticalMatches = collectVerticalMatches(board, {row: 0, col: 0}, []);
-    const horizontalMatches= collectHorizontalMatches(board, {row: 0, col: 0}, []);
-  
-    return [...horizontalMatches, ...verticalMatches]
-  }
+    function collectVerticalMatches(
+        board: Board<T>,
+        currentPosition: Position,
+        allMatches: Match<T>[]
+    ): Match<T>[] {
+        if (isOutsideBoard(board, currentPosition)) {
+            return allMatches;
+        } else {
+            const verticalMatches = getVerticalMatches(
+                board,
+                currentPosition.col
+            );
+            const newPosition: Position = {
+                row: currentPosition.row,
+                col: currentPosition.col + 1,
+            };
+            return collectVerticalMatches(board, newPosition, [
+                ...allMatches,
+                ...verticalMatches,
+            ]);
+        }
+    }
+
+    const verticalMatches = collectVerticalMatches(
+        board,
+        { row: 0, col: 0 },
+        []
+    );
+    const horizontalMatches = collectHorizontalMatches(
+        board,
+        { row: 0, col: 0 },
+        []
+    );
+
+    return [...horizontalMatches, ...verticalMatches];
+}
