@@ -71,6 +71,7 @@ const SignUpPage: React.FC = () => {
                             id: -1,
                             password: passwordInput,
                             username: usernameInput,
+                            games: [],
                         })
                     );
                 }}

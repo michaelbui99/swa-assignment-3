@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../models/user";
+import { Game } from "../models/game";
 
 export interface UserState {
     value: User | undefined;
@@ -19,6 +20,28 @@ export type LoginResponseDTO = {
 const initialState: UserState = {
     value: undefined,
 };
+
+export const updateUser = createAsyncThunk<User, User>(
+    "user/updateUser",
+    async (user, { rejectWithValue }) => {
+        const baseUrl = "http://localhost:9090";
+        const endpoint = `${baseUrl}/users/${user.id}?token=${user.token}`;
+        const response = await fetch(endpoint, {
+            body: JSON.stringify({
+                displayName: user.displayName,
+                profileImageUrl: user.profileImageUrl,
+            }),
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.status < 200 || response.status >= 300) {
+            return rejectWithValue(undefined);
+        }
+        return user;
+    }
+);
 
 export const createUser = createAsyncThunk<undefined, User>(
     "user/createUser",
@@ -39,6 +62,13 @@ export const createUser = createAsyncThunk<undefined, User>(
         return undefined;
     }
 );
+
+async function getAllGames(token: string): Promise<Game[]> {
+    const baseUrl = "http://localhost:9090";
+    const endpoint = `${baseUrl}/games?token=${token}`;
+    const response = await fetch(endpoint);
+    return (await response.json()) as Game[];
+}
 
 const getusebyId = async function getuserById(
     userId: number,
@@ -83,9 +113,13 @@ export const loginUser = createAsyncThunk<User | undefined, LoginRequestDTO>(
         }
 
         user.token = loginData.token;
+        const games = await getAllGames(user.token);
+        user.games = games.filter((game) => game.user === user.id);
+        console.log(user);
         return user;
     }
 );
+
 export const logoutUser = createAsyncThunk<undefined, User>(
     "user/logoutUser",
     async (user, { rejectWithValue }) => {
@@ -125,6 +159,9 @@ export const userSlice = createSlice({
         });
         builder.addCase(logoutUser.rejected, (state, _) => {
             state.value = state.value;
+        });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            state.value = action.payload;
         });
     },
 });
