@@ -51,9 +51,9 @@ const getusebyId = async function getuserById(
     }
 };
 
-const getAllGames = async function games(): Promise<Game[] | undefined> {
+const getAllGames = async function games(token: string): Promise<Game[] | undefined> {
     const baseUrl = "http://localhost:9090";
-    const endpoint = `${baseUrl}/games`;
+    const endpoint = `${baseUrl}/games?token=${token}`;
     const gamesResposne = await fetch(endpoint, {
         method: "GET",
         headers: {
@@ -87,7 +87,7 @@ function getTop3ScoresForUser(userId: number, scores: Score[]): Score[] {
 export const gethighScores = createAsyncThunk<allScore, userDto>(
     "game/top10Scores",
     async (user, {rejectWithValue}) =>{
-        const allGames: Game[] | undefined = await getAllGames(); 
+        const allGames: Game[] | undefined = await getAllGames(user.token); 
         const logedInUser: User | undefined = await getusebyId(user.id, user.token);
         if(!allGames){
             return rejectWithValue({userScore: [], top10Score: []});

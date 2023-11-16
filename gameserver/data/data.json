@@ -1,37 +1,74 @@
 {
-    "users": [
-        {
-            "username": "admin",
-            "password": "secret",
-            "id": 0,
-            "admin": true
-        },
-        {
-            "admin": false,
-            "userId": -1,
-            "password": "testhest",
-            "username": "test",
-            "id": 1
-        },
-        {
-            "admin": false,
-            "userId": -1,
-            "password": "test123",
-            "username": "test123",
-            "id": 2
-        },
-        {
-            "admin": false,
-            "id": 3,
-            "password": "testhest",
-            "username": "testhest"
-        },
-        {
-            "admin": false,
-            "id": 4,
-            "password": "testhest",
-            "username": "testhest123"
-        }
-    ],
-    "games": []
+  "users": [
+    {
+      "username": "admin",
+      "password": "secret",
+      "id": 0,
+      "admin": true
+    },
+    {
+      "admin": false,
+      "userId": -1,
+      "password": "testhest",
+      "username": "test",
+      "id": 1
+    },
+    {
+      "admin": false,
+      "userId": -1,
+      "password": "test123",
+      "username": "test123",
+      "id": 2
+    },
+    {
+      "admin": false,
+      "id": 3,
+      "password": "testhest",
+      "username": "testhest"
+    },
+    {
+      "admin": false,
+      "id": 4,
+      "password": "testhest",
+      "username": "testhest123"
+    },
+    {
+      "admin": false,
+      "id": 5,
+      "password": "12345678",
+      "username": "testUser"
+    },
+    {
+      "admin": false,
+      "id": 6,
+      "password": "12345678",
+      "username": "Kutaiba"
+    }
+  ],
+  "games": [
+    {
+      "id": 0,
+      "user": 6,
+      "score": 100,
+      "completed": true
+    },
+    {
+      "id": 1,
+      "user": 5,
+      "score": 200,
+      "completed": true
+    },
+    {
+      "id": 2,
+      "user": 4,
+      "score": 500,
+      "completed": true
+    },
+    {
+      "id": 3,
+      "user": 6,
+      "score": 250,
+      "completed": true
+    }
+  ]
 }
