@@ -93,7 +93,10 @@ export const gethighScores = createAsyncThunk<allScore, userDto>(
             return rejectWithValue({userScore: [], top10Score: []});
         }
         let scoreList: Score[] = [];
-        allGames.forEach(game => {
+        let finishedGames: Game[] = [];
+
+        finishedGames = allGames.filter(game => game.completed = true);
+        finishedGames.forEach(game => {
             scoreList.push({
                 userId: game.user,
                 score: game.score,
