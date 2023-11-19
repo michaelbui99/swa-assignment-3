@@ -33,7 +33,7 @@ const UserStats: React.FC<UserStatsProps> = ({ games }) => {
                     value:
                         games
                             .map((game) => game.score)
-                            .sort((a, b) => a - b)[0] ?? 0,
+                            .sort((a, b) => b - a)[0] ?? 0,
                 }}
             />
         </Flex>

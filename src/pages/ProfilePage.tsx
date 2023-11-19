@@ -22,6 +22,7 @@ import UserCard from "../components/UserCard";
 import UserStats from "../components/UserStats";
 import { EditIcon } from "@chakra-ui/icons";
 import { updateUser } from "../app/features/userSlice";
+import GamesList from "../components/GamesList";
 
 const ProfilePage: React.FC = () => {
     const currentUser = useSelector((state: RootState) => state.user.value);
@@ -66,6 +67,7 @@ const ProfilePage: React.FC = () => {
                             />
                             <UserCard user={currentUser} />
                             <UserStats games={currentUser.games} />
+                            <GamesList games={currentUser.games} />
 
                             <Modal
                                 closeOnOverlayClick={false}
