@@ -5,46 +5,55 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import Layout from "./components/Layout";
 import ProfilePage from "./pages/ProfilePage";
+import ScorePage from "./pages/ScorePage";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <Layout>
-                <App></App>
-            </Layout>
-        ),
-    },
-    {
-        path: "/game",
-        element: (
-            <Layout>
-                <GamePage />
-            </Layout>
-        ),
-    },
-    {
-        path: "/signup",
-        element: (
-            <Layout>
-                <SignUpPage />
-            </Layout>
-        ),
-    },
-    {
-        path: "/login",
-        element: (
-            <Layout>
-                <LoginPage />
-            </Layout>
-        ),
-    },
-    {
-        path: "/profile",
-        element: (
-            <Layout>
-                <ProfilePage />
-            </Layout>
-        ),
-    },
+  {
+    path: "/",
+    element: (
+      <Layout>
+        <App></App>
+      </Layout>
+    ),
+  },
+  {
+    path: "/game",
+    element: (
+      <Layout>
+        <GamePage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <Layout>
+        <SignUpPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <Layout>
+        <LoginPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <Layout>
+        <ProfilePage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/scores",
+    element: (
+      <Layout>
+        <ScorePage />
+      </Layout>
+    ),
+  },
 ]);
