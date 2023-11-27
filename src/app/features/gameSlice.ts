@@ -7,18 +7,21 @@ import { createRandomGenerator } from "../../game/random-generator";
 import { User } from "../models/user";
 
 export interface GameState {
-    game: Game | undefined;
-    generator: Generator<string>;
+    value: {
+        game: Game | undefined;
+    };
 }
 
 export type Move = {
     from: Position;
     to: Position;
+    generator: Generator<string>;
 };
 
 const initialState: GameState = {
-    game: undefined,
-    generator: createRandomGenerator(["A", "B", "C"]),
+    value: {
+        game: undefined,
+    },
 };
 
 export const gameSlice = createSlice({
@@ -26,29 +29,32 @@ export const gameSlice = createSlice({
     initialState,
     reducers: {
         makeMove: (state, action: PayloadAction<Move>) => {
-            if (!state.game) {
+            if (!state.value.game) {
                 return undefined;
             }
-            const { from, to } = action.payload;
-            const result = move(state.generator, state.game.board, from, to);
+            const { from, to, generator } = action.payload;
+            const result = move(generator, state.value.game.board, from, to);
 
             const matchEffects = result.effects.filter(
                 (effect) => effect.kind === "Match"
             );
 
             return {
-                game: {
-                    ...state.game,
-                    board: result.board,
-                    score: state.game.score + 1000 * matchEffects.length,
+                value: {
+                    game: {
+                        ...state.value.game,
+                        board: result.board,
+                        score:
+                            state.value.game.score + 1000 * matchEffects.length,
+                    },
                 },
-                generator: state.generator,
             };
         },
-        setGame: (state, action: PayloadAction<Game>) => {
+        setGame: (_, action: PayloadAction<Game>) => {
             return {
-                game: action.payload,
-                generator: state.generator,
+                value: {
+                    game: action.payload,
+                },
             };
         },
     },
@@ -63,6 +69,7 @@ export const createNewGame = createAsyncThunk<Game, User>(
         const response = await fetch(endpoint, {
             method: "POST",
         });
+
         if (response.status < 200 || response.status >= 300) {
             return thunkAPI.rejectWithValue(undefined);
         }
