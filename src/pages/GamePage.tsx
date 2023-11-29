@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../app/store";
 import { useNavigate } from "react-router";
-import { createNewGame } from "../app/features/gameSlice";
+import { createNewGameThunk } from "../app/features/gameSlice";
 
 export interface GamePageProps {}
 
@@ -18,7 +18,7 @@ const GamePage: React.FC<GamePageProps> = () => {
         }
 
         if (!game) {
-            dispatch(createNewGame(currentUser!));
+            dispatch(createNewGameThunk(currentUser!));
         }
     }, [currentUser, game]);
 
