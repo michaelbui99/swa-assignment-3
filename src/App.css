@@ -40,3 +40,83 @@
 .read-the-docs {
     color: #888;
 } */
+
+.board-cell {
+    box-shadow: 0px 0px 2px 0.5px gray;
+}
+
+@keyframes moveRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(50px);
+    } /* Adjust distance as needed */
+}
+
+@keyframes moveLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50px);
+    } /* Adjust distance as needed */
+}
+
+@keyframes moveUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50px);
+    } /* Adjust distance as needed */
+}
+
+@keyframes moveDown {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(50px);
+    } /* Adjust distance as needed */
+}
+
+.moving-right {
+    animation: moveRight 0.5s ease-in-out forwards;
+}
+
+.moving-left {
+    animation: moveLeft 0.5s ease-in-out forwards;
+}
+
+.moving-up {
+    animation: moveUp 0.5s ease-in-out forwards;
+}
+
+.moving-down {
+    animation: moveDown 0.5s ease-in-out forwards;
+}
+
+@keyframes soap-bubble-pop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.soap-bubble {
+    /* width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #fff;
+        transform: translate(-50%, -50%); */
+    animation: soap-bubble-pop 0.4s ease-out forwards;
+}

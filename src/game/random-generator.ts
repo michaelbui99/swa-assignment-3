@@ -1,15 +1,15 @@
 import { Generator } from "./board";
 
-export function createRandomGenerator(pieces: string[]): Generator<string> {
-    const nextIndex = (pieces: string[]) => {
-        return Math.floor(Math.random() * pieces.length);
-    };
+export class RandomGenerator implements Generator<string> {
+    private pieces = ["A", "B", "C"];
 
-    const next = (): string => {
-        return pieces[nextIndex(pieces)];
-    };
+    constructor() {}
 
-    return {
-        next,
-    };
+    next(): string {
+        return this.pieces[this.getNextPieceIndex()];
+    }
+
+    private getNextPieceIndex(): number {
+        return Math.floor(Math.random() * this.pieces.length);
+    }
 }

@@ -5,5 +5,6 @@ export type Game = {
     user: number;
     score: number;
     completed: boolean;
+    movesUsed: number;
     board: Board<string>;
 };
