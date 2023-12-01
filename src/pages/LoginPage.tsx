@@ -16,8 +16,8 @@ import { useNavigate } from "react-router-dom";
 const LoginPage: React.FC = () => {
     const currentUser = useSelector((state: RootState) => state.user.value);
     const navigate = useNavigate();
-    const [usernameInput, setUsernameInput] = useState("");
-    const [userPasswordInput, setPasswordInput] = useState("");
+    const [usernameInput, setUsernameInput] = useState("test123");
+    const [userPasswordInput, setPasswordInput] = useState("test123");
 
     const usernameIsInvalid = usernameInput == "";
     const passwordIsInvalid = userPasswordInput.length < 8;

@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ routeLinks }) => {
                 {routeLinks
                     .filter((link) => link.show)
                     .map((link) => (
-                        <RouteLink link={link} />
+                        <RouteLink key={link.label} link={link} />
                     ))}
             </Flex>
         </Flex>

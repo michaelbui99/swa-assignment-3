@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import { canMove, create, move } from "../game/board";
-import { SequenceGenerator } from "../game/init";
+import React, { useEffect, useState } from "react";
+import { canMove, move } from "../game/board";
 import "../App.css";
-import { RandomGenerator } from "../game/random-generator";
-import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { RootState, useAppDispatch, useAppSelector } from "../app/store";
+import { useNavigate } from "react-router-dom";
+import { createGameThunk, updateGameThunk } from "../app/features/thunks";
+import { createRandomGenerator } from "../game/random-generator";
 
 export interface GamePageProps {}
 
 const GamePage: React.FC<GamePageProps> = () => {
-    const generator = new RandomGenerator();
-    const [board, setBoard] = useState(create(generator, 5, 5));
-    const { value: game } = useSelector((state: RootState) => state.game);
+    
+    const dispatch = useAppDispatch();
+    const game = useAppSelector((state: RootState) => state.game.value);
+    const currentUser = useAppSelector((state: RootState) => state.user.value);
 
     const [selectedCell, setSelectedCell] = useState<{
         row: number;
@@ -21,15 +22,26 @@ const GamePage: React.FC<GamePageProps> = () => {
         row: number;
         col: number;
     } | null>(null);
-    const [matches, setMatches] = useState<any[] | null>(null);
     const [inputDisabled, setInputDisabled] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!currentUser) {
+            navigate("/login");
+        }
+        
+        if (!game) {
+            dispatch(createGameThunk(currentUser));
+        }
+        
+    }, [currentUser, game]);
 
     const handleCellClick = (row: number, col: number) => {
         if (!game) {
             return;
         }
         if (selectedCell) {
-            if (canMove(game.board, selectedCell, { row, col })) {
+            if (canMove(game?.board, selectedCell, { row, col })) {
                 swapPieces(row, col);
             } else {
                 setSelectedCell(null);
@@ -43,12 +55,16 @@ const GamePage: React.FC<GamePageProps> = () => {
         if (!game) {
             return;
         }
-        if (selectedCell && !inputDisabled) {
+        if (selectedCell && !inputDisabled && currentUser) {
             setTargetPiece({ row, col });
             setInputDisabled(true);
+            const moved = move(createRandomGenerator(), game?.board, selectedCell, { row, col });
+            
+            console.log("moved", moved.effects.filter((e) => e.kind === "Match"));
+            let matched = moved.effects.filter((e) => e.type === "Match");
+            console.log("matched", matched);
             setTimeout(() => {
-                let next = move(generator, board, selectedCell, { row, col });
-                setBoard(next.board);
+                dispatch(updateGameThunk(currentUser, { ...game, board: moved.board}));
                 setSelectedCell(null);
                 setTargetPiece(null);
                 setInputDisabled(false);
@@ -113,7 +129,8 @@ const GamePage: React.FC<GamePageProps> = () => {
         return "";
     };
 
-    const boardHtml = board.state.map((row, rowIndex) => (
+
+    const boardHtml = game?.board?.state.map((row, rowIndex) => (
         <div
             key={rowIndex}
             style={{

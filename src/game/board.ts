@@ -444,7 +444,8 @@ function getHorizontalMatches<T>(board: Board<T>, row: number): Match<T>[] {
 
     const firstPosition = { row, col: 0 };
     const firstPieceType = piece(board, firstPosition);
-    return go(board, firstPosition, firstPieceType, [], []);
+    return go(board, firstPosition, firstPieceType!, [], []);
+
 }
 
 function getVerticalMatches<T>(board: Board<T>, col: number): Match<T>[] {

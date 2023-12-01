@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 import { User } from "../models/user";
 import { Game } from "../models/game";
@@ -99,7 +99,6 @@ export const loginUser = createAsyncThunk<User | undefined, LoginRequestDTO>(
             },
         });
         const loginData: LoginResponseDTO = await loginResponse.json();
-        console.log(loginData);
         if (loginResponse.status < 200 || loginResponse.status >= 300) {
             return rejectWithValue(undefined);
         }
@@ -115,7 +114,7 @@ export const loginUser = createAsyncThunk<User | undefined, LoginRequestDTO>(
         user.token = loginData.token;
         const games = await getAllGames(user.token);
         user.games = games.filter((game) => game.user === user.id);
-        console.log(user);
+        // localStorage.setItem("user", JSON.stringify(user));
         return user;
     }
 );
@@ -142,7 +141,12 @@ export const logoutUser = createAsyncThunk<undefined, User>(
 export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
+    reducers: {
+        setLoggedInUser: (state, action) => {
+            // console.log("setting logged in user:", action.payload);
+            return { ...state, value: action.payload };
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(createUser.fulfilled, (state, action) => {
             return { value: action.payload };
@@ -164,5 +168,7 @@ export const userSlice = createSlice({
         });
     },
 });
+
+export const { setLoggedInUser } = userSlice.actions;
 
 export default userSlice.reducer;

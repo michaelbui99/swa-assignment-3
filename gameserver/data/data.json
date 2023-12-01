@@ -35,5 +35,700 @@
       "username": "testhest123"
     }
   ],
-  "games": []
+  "games": [
+    {
+      "user": 2,
+      "id": 1,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 2,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 3,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 4,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 5,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 6,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 7,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 8,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 9,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "A",
+            "A",
+            "C",
+            "C"
+          ],
+          [
+            "B",
+            "A",
+            "B",
+            "C"
+          ],
+          [
+            "A",
+            "B",
+            "C",
+            "A"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 10,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 11,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "C",
+            "B",
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "C",
+            "C"
+          ],
+          [
+            "B",
+            "A",
+            "A",
+            "C"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 12,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 13,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "C",
+            "C",
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "A",
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "A",
+            "A",
+            "A"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 14,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 15,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "B",
+            "C",
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "A",
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "B",
+            "B",
+            "A"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 16,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 17,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "B",
+            "B",
+            "B",
+            "C"
+          ],
+          [
+            "A",
+            "B",
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C",
+            "C",
+            "B"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 18,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 19,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 20,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 21,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "B",
+            "C",
+            "C",
+            "A"
+          ],
+          [
+            "A",
+            "A",
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "A",
+            "B"
+          ]
+        ],
+        "width": 4,
+        "height": 3
+      }
+    },
+    {
+      "user": 2,
+      "id": 22,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 23,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 24,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 25,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "board": {
+          "state": [
+            [
+              "A",
+              "B",
+              "C",
+              "A"
+            ],
+            [
+              "C",
+              "A",
+              "A",
+              "B"
+            ],
+            [
+              "B",
+              "B",
+              "C",
+              "A"
+            ]
+          ],
+          "height": 3,
+          "width": 4
+        },
+        "effects": [
+          {
+            "kind": "Match",
+            "match": {
+              "matched": "A",
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 0,
+                  "col": 1
+                },
+                {
+                  "row": 0,
+                  "col": 2
+                },
+                {
+                  "row": 0,
+                  "col": 3
+                }
+              ]
+            }
+          },
+          {
+            "kind": "Match",
+            "match": {
+              "matched": "A",
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 3
+                },
+                {
+                  "row": 1,
+                  "col": 3
+                },
+                {
+                  "row": 2,
+                  "col": 3
+                }
+              ]
+            }
+          },
+          {
+            "kind": "Refill",
+            "board": {
+              "state": [
+                [
+                  "A",
+                  "A",
+                  "A",
+                  "B"
+                ],
+                [
+                  "C",
+                  "B",
+                  "C",
+                  "A"
+                ],
+                [
+                  "B",
+                  "C",
+                  "C",
+                  "C"
+                ]
+              ],
+              "height": 3,
+              "width": 4
+            }
+          },
+          {
+            "kind": "Match",
+            "match": {
+              "matched": "A",
+              "positions": [
+                {
+                  "row": 0,
+                  "col": 0
+                },
+                {
+                  "row": 0,
+                  "col": 1
+                },
+                {
+                  "row": 0,
+                  "col": 2
+                }
+              ]
+            }
+          },
+          {
+            "kind": "Match",
+            "match": {
+              "matched": "C",
+              "positions": [
+                {
+                  "row": 2,
+                  "col": 1
+                },
+                {
+                  "row": 2,
+                  "col": 2
+                },
+                {
+                  "row": 2,
+                  "col": 3
+                }
+              ]
+            }
+          },
+          {
+            "kind": "Refill",
+            "board": {
+              "state": [
+                [
+                  "A",
+                  "B",
+                  "C",
+                  "A"
+                ],
+                [
+                  "C",
+                  "A",
+                  "A",
+                  "B"
+                ],
+                [
+                  "B",
+                  "B",
+                  "C",
+                  "A"
+                ]
+              ],
+              "height": 3,
+              "width": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "user": 2,
+      "id": 26,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 27,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 28,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "C",
+            "A",
+            "C",
+            "B"
+          ],
+          [
+            "C",
+            "A",
+            "B",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "C",
+            "A"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    },
+    {
+      "user": 2,
+      "id": 29,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 30,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "C",
+            "B",
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "C",
+            "C",
+            "A"
+          ],
+          [
+            "A",
+            "B",
+            "A",
+            "A"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    },
+    {
+      "user": 2,
+      "id": 31,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 32,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "A",
+            "C",
+            "A",
+            "A"
+          ],
+          [
+            "C",
+            "B",
+            "C",
+            "B"
+          ],
+          [
+            "B",
+            "C",
+            "B",
+            "B"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    },
+    {
+      "user": 2,
+      "id": 33,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 34,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "A",
+            "B",
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "C",
+            "C",
+            "A",
+            "B"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    },
+    {
+      "user": 2,
+      "id": 35,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 36,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 37,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 38,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "C",
+            "B",
+            "B",
+            "C"
+          ],
+          [
+            "C",
+            "B",
+            "C",
+            "A"
+          ],
+          [
+            "A",
+            "C",
+            "A",
+            "B"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    },
+    {
+      "user": 2,
+      "id": 39,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 2,
+      "id": 40,
+      "score": 0,
+      "completed": false,
+      "board": {
+        "state": [
+          [
+            "A",
+            "C",
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "A",
+            "B",
+            "B"
+          ],
+          [
+            "C",
+            "A",
+            "B",
+            "B"
+          ]
+        ],
+        "height": 3,
+        "width": 4
+      }
+    }
+  ]
 }

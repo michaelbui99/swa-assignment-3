@@ -1,15 +1,27 @@
 import { Box, Stack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar, { RouteLinkType } from "./Navbar";
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { RootState, useAppDispatch } from "../app/store";
+import { setLoggedInUser } from "../app/features/userSlice";
 
 export interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    
+
+    const dispatch = useAppDispatch();
+    const cachedUser = localStorage.getItem("user");
+    
     const currentUser = useSelector((state: RootState) => state.user.value);
+
+    useEffect(() => {
+        if(cachedUser != null) {
+            dispatch(setLoggedInUser(cachedUser));
+        }
+    });
 
     const routeLinks = [
         {
