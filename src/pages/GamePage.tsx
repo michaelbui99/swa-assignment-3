@@ -14,6 +14,7 @@ import { canMove } from "../game/board";
 export interface GamePageProps {}
 
 const GamePage: React.FC<GamePageProps> = () => {
+    const MAX_MOVES = 3;
     const currentUser = useSelector((state: RootState) => state.user.value);
     const game = useSelector((state: RootState) => state.game.value);
     const [inputDisabled, setInputDisabled] = useState(false);
@@ -35,10 +36,14 @@ const GamePage: React.FC<GamePageProps> = () => {
             navigate("/login");
         }
 
-        if (!game) {
+        if (!game || game.completed) {
             dispatch(createNewGameThunk(currentUser!));
         } else {
-            if (game!.movesUsed && game.movesUsed >= 2 && !game.completed) {
+            if (
+                game!.movesUsed &&
+                game.movesUsed >= MAX_MOVES &&
+                !game.completed
+            ) {
                 dispatch(endGameThunk(currentUser!));
                 navigate("/scores");
             }
@@ -59,6 +64,7 @@ const GamePage: React.FC<GamePageProps> = () => {
                         generator,
                     })
                 );
+                setSelectedCell(null);
             } else {
                 setSelectedCell(null);
             }

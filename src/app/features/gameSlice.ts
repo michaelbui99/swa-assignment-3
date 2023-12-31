@@ -54,7 +54,7 @@ export const gameSlice = createSlice({
     extraReducers: (_) => {},
 });
 
-export const createNewGameThunk = createAsyncThunk<Game, User>(
+export const createNewGameThunk = createAsyncThunk<void, User>(
     "game/newGame",
     async (user, thunkAPI) => {
         const baseUrl = "http://localhost:9090";
@@ -74,12 +74,10 @@ export const createNewGameThunk = createAsyncThunk<Game, User>(
             board: create(new RandomGenerator(), 5, 5),
         };
         thunkAPI.dispatch(gameSlice.actions.setGame(newGameWithBoard));
-
-        return newGameWithBoard;
     }
 );
 
-export const makeMoveThunk = createAsyncThunk<Game, Move>(
+export const makeMoveThunk = createAsyncThunk<void, Move>(
     "game/makeMoveThunk",
     async (move, thunkAPI) => {
         const state = (thunkAPI.getState() as any).game as GameState;
@@ -98,14 +96,14 @@ export const makeMoveThunk = createAsyncThunk<Game, Move>(
         });
 
         if (response.status < 200 || response.status >= 300) {
-            return rollbackState.value!;
+            thunkAPI.dispatch(gameSlice.actions.setGame(rollbackState.value!));
         }
 
-        return (thunkAPI.getState() as GameState).value!;
+        // return (thunkAPI.getState() as GameState).value!;
     }
 );
 
-export const endGameThunk = createAsyncThunk<Game, User>(
+export const endGameThunk = createAsyncThunk<void, User>(
     "game/makeMoveThunk",
     async (user, thunkAPI) => {
         const state = (thunkAPI.getState() as any).game as GameState;
@@ -124,11 +122,9 @@ export const endGameThunk = createAsyncThunk<Game, User>(
 
         if (response.status < 200 || response.status >= 300) {
             thunkAPI.dispatch(gameSlice.actions.setGame(rollbackState.value!));
-            return rollbackState.value!;
         }
 
         thunkAPI.dispatch(gameSlice.actions.setGame(desiredStateOfGame));
-        return (thunkAPI.getState() as GameState).value!;
     }
 );
 

@@ -33,6 +33,13 @@
       "id": 4,
       "password": "testhest",
       "username": "testhest123"
+    },
+    {
+      "admin": false,
+      "id": 5,
+      "password": "test123123",
+      "username": "testuser123",
+      "games": []
     }
   ],
   "games": [
@@ -839,6 +846,180 @@
         "height": 5,
         "width": 5
       }
+    },
+    {
+      "user": 4,
+      "id": 86,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 4,
+      "id": 87,
+      "score": 11000,
+      "completed": true,
+      "movesUsed": 2,
+      "board": {
+        "state": [
+          [
+            "A",
+            "A",
+            "B",
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "B",
+            "A",
+            "A",
+            "C"
+          ],
+          [
+            "A",
+            "C",
+            "B",
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "A",
+            "B",
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "C",
+            "A",
+            "B",
+            "A"
+          ]
+        ],
+        "height": 5,
+        "width": 5
+      }
+    },
+    {
+      "user": 4,
+      "id": 88,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 4,
+      "id": 89,
+      "score": 33000,
+      "completed": true,
+      "movesUsed": 2,
+      "board": {
+        "state": [
+          [
+            "C",
+            "A",
+            "A",
+            "B",
+            "B"
+          ],
+          [
+            "B",
+            "A",
+            "C",
+            "B",
+            "C"
+          ],
+          [
+            "B",
+            "C",
+            "C",
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            "C",
+            "B",
+            "A",
+            "C"
+          ],
+          [
+            "B",
+            "B",
+            "A",
+            "B",
+            "B"
+          ]
+        ],
+        "height": 5,
+        "width": 5
+      }
+    },
+    {
+      "user": 4,
+      "id": 90,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 4,
+      "id": 91,
+      "score": 32000,
+      "completed": true,
+      "movesUsed": 3,
+      "board": {
+        "state": [
+          [
+            "A",
+            "C",
+            "A",
+            "C",
+            "C"
+          ],
+          [
+            "B",
+            "C",
+            "A",
+            "A",
+            "B"
+          ],
+          [
+            "B",
+            "A",
+            "C",
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "A",
+            "A",
+            "C",
+            "A"
+          ],
+          [
+            "C",
+            "C",
+            "B",
+            "B",
+            "C"
+          ]
+        ],
+        "height": 5,
+        "width": 5
+      }
+    },
+    {
+      "user": 4,
+      "id": 92,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 4,
+      "id": 93,
+      "score": 0,
+      "completed": false
     }
   ]
 }
