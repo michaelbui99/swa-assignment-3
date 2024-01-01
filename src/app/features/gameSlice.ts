@@ -1,5 +1,5 @@
 import { Game } from "../models/game";
-import { Generator } from "../../game/board";
+import { Generator, canMove } from "../../game/board";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Position } from "../../game/board";
 import { move, create } from "../../game/board";
@@ -81,6 +81,11 @@ export const makeMoveThunk = createAsyncThunk<void, Move>(
     "game/makeMoveThunk",
     async (move, thunkAPI) => {
         const state = (thunkAPI.getState() as any).game as GameState;
+        if (!canMove(state.value!.board, move.from, move.to)) {
+            thunkAPI.dispatch(gameSlice.actions.setGame(state.value!));
+            return;
+        }
+
         const rollbackState: GameState = JSON.parse(JSON.stringify(state));
 
         thunkAPI.dispatch(gameSlice.actions.makeMove(move));

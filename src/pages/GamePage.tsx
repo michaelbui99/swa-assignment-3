@@ -55,19 +55,15 @@ const GamePage: React.FC<GamePageProps> = () => {
             return;
         }
         if (selectedCell) {
-            if (canMove(game.board, selectedCell, { row, col })) {
-                dispatch(
-                    makeMoveThunk({
-                        user: currentUser!,
-                        from: selectedCell,
-                        to: { row, col },
-                        generator,
-                    })
-                );
-                setSelectedCell(null);
-            } else {
-                setSelectedCell(null);
-            }
+            dispatch(
+                makeMoveThunk({
+                    user: currentUser!,
+                    from: selectedCell,
+                    to: { row, col },
+                    generator,
+                })
+            );
+            setSelectedCell(null);
         } else {
             setSelectedCell({ row, col });
         }

@@ -40,6 +40,13 @@
       "password": "test123123",
       "username": "testuser123",
       "games": []
+    },
+    {
+      "admin": false,
+      "id": 6,
+      "password": "test123123",
+      "username": "mibuitest",
+      "games": []
     }
   ],
   "games": [
@@ -1020,6 +1027,126 @@
       "id": 93,
       "score": 0,
       "completed": false
+    },
+    {
+      "user": 6,
+      "id": 94,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 6,
+      "id": 95,
+      "score": 28000,
+      "completed": true,
+      "movesUsed": 3,
+      "board": {
+        "state": [
+          [
+            "C",
+            "B",
+            "B",
+            "C",
+            "C"
+          ],
+          [
+            "B",
+            "C",
+            "A",
+            "A",
+            "B"
+          ],
+          [
+            "C",
+            "C",
+            "A",
+            "A",
+            "C"
+          ],
+          [
+            "C",
+            "A",
+            "C",
+            "C",
+            "A"
+          ],
+          [
+            "A",
+            "C",
+            "A",
+            "B",
+            "C"
+          ]
+        ],
+        "height": 5,
+        "width": 5
+      }
+    },
+    {
+      "user": 6,
+      "id": 96,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 6,
+      "id": 97,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 6,
+      "id": 98,
+      "score": 0,
+      "completed": false
+    },
+    {
+      "user": 6,
+      "id": 99,
+      "score": 10000,
+      "completed": true,
+      "movesUsed": 3,
+      "board": {
+        "state": [
+          [
+            "A",
+            "A",
+            "B",
+            "A",
+            "C"
+          ],
+          [
+            "A",
+            "B",
+            "A",
+            "C",
+            "B"
+          ],
+          [
+            "B",
+            "C",
+            "B",
+            "B",
+            "A"
+          ],
+          [
+            "A",
+            "B",
+            "B",
+            "A",
+            "C"
+          ],
+          [
+            "A",
+            "A",
+            "C",
+            "A",
+            "C"
+          ]
+        ],
+        "height": 5,
+        "width": 5
+      }
     }
   ]
 }
